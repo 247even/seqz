@@ -1,0 +1,22 @@
+{
+  "name": "SEQZ",
+  "version": "0.0.1",
+  "description": "> some kind of quiz",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/247even/seqz.git"
+  },
+  "author": "247even",
+  "license": "Apache-2.0",
+  "keywords": [
+    "seqz",
+    "quiz",
+    "survey",
+    "poll",
+    "test"
+  ],
+  "bugs": {
+    "url": "https://github.com/247even/seqz/issues"
+  },
+  "homepage": "https://github.com/247even/seqz"
+}
