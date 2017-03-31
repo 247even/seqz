@@ -1,0 +1,16 @@
+{
+    "Fragen": [
+      {
+        "id": "id1",
+        "Typ": "mp3",
+        "Frage": "Eine Frage?",
+        "Antworten": ["Antwort eins", "Antwort zwei", "Antwort drei"]
+      },
+      {
+        "id": "id2",
+        "Typ": "mp3",
+        "Frage": "Noch eine zweite Frage?",
+        "Antworten": ["Antwort eins", "Antwort zwei", "Antwort drei"]
+      }
+    ]
+}

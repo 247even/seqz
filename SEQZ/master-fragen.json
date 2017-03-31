@@ -1,0 +1,12 @@
+{
+    "id": "uschiulli",
+    "Player1": "Uschi",
+    "Player2": "Ulli",
+    "Fragen": [{
+        "Frage": "Was würdest du jetzt am liebsten in den Mund nehmen?",
+        "Antworten": ["Fuß", "Schwanz"]
+    }, {
+        "Frage": "Mit wievielen deiner Facebook-Freunde hattest du schon sexuellen Kontakt?",
+        "Antworten": ["Ja", "Nein"]
+    }]
+}

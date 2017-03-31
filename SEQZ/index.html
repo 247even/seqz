@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="shortcut icon" href="" type="image/x-icon">
+    <meta name="description" content="">
+    <title>SEQZ!</title>
+    <!--
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+-->
+    <script src="js/jquery-3.2.0.min.js"></script>
+    <script src="js/prototype.js"></script>
+    <script src="js/toastr.min.js"></script>
+    <script src="js/funcs.js"></script>
+    <script src="js/templates.js"></script>
+    <script src="js/pollSeqz.js"></script>
+    <script src="js/seqz.js"></script>
+    <script src="js/init.js"></script>
+    <!--
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+  -->
+    <!--
+    <link href="https://fonts.googleapis.com/css?family=Fredoka+One" rel="stylesheet">
+  -->
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/toastr.min.css" />
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/seqz.css">
+</head>
+
+<body class="bg-image">
+    <div id="flash" class="screen overlay hidden"></div>
+    <div id="splash" class="screen splash hidden">2x!</div>
+    <div id="bonus-splash" class="screen splash hidden">100</div>
+
+    <header>
+        <div id="header-logo" class="logo-bg coloreffect">
+          SEQZ!
+        </div>
+        <div id="info-box">
+          <user>Player</user> vs. <opponent>Player</opponent>
+        </div>
+    </header>
+
+    <div class="header-spacer"></div>
+
+    <div id="loginscreen" class="screen">
+        <div class="login-wrapper">
+            <div id="login-logo" class="logo-bg coloreffect">
+              SEQZ!
+            </div>
+            <div id="log-in">
+                <button id="log-player1" data-player="1" class="playerselect button">Hallo Spieler 1!</button>
+                <button id="log-player2" data-player="2" class="playerselect button">Hallo Spieler 2!</button>
+                <!--
+                <div id="log-player1" data-player="1" class="playerselect">
+                    Hallo Player1!
+                </div>
+                <div id="log-player2" data-player="2" class="playerselect">
+                    Hallo Player2!
+                </div>
+              -->
+            </div>
+        </div>
+    </div>
+
+    <div id="readyscreen" class="screen hidden">
+      <div class="frame height100">
+        <div class="ready-wrapper">
+            <div id="readybutton" class="readybutton hidden">
+                <span class="readybutton-bereit button">Bereit, <user>Player</user>?</span>
+                <span class="readybutton-warte button hidden infinite">Warte auf <opponent>Oppo</opponent>...</span>
+            </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="interscreen" class="screen overlay hidden">
+        <div class="interscreen-footer">
+            <div class="readybutton">
+                <span class="readybutton-bereit button">Bereit?</span>
+                <span class="readybutton-warte button hidden infinite">Warte...</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="resultscreen" class="screen hidden">
+        <div class="header-spacer"></div>
+        <div class="frame">
+            <div class="resultdiv result1">
+                <div class="res-text">
+                    <h2><span>WOW!</span><br><span>Ihr habt <score>0</score> von <span class="result-max">150</span>Punkte!</span></h2>
+                </div>
+                <div class="star match-badge res-star1"><score>0</score></div>
+            </div>
+            <div class="resultdiv result2">
+                <div class="res-text">
+                    <h2><span>Nicht schlecht! <score>0</score> von <span class="result-max"> </span>!</span></h2>
+                </div>
+                <div class="star match-badge res-star2"><score>0</score></div>
+            </div>
+            <div class="resultdiv result3">
+                <div class="res-text">
+                    <h2><span>Da ist noch Luft nach oben... <score>0</score> von <span class="result-max"> </span>!</span></h2>
+                </div>
+                <div class="star match-badge res-star3"><score>0</score></div>
+            </div>
+            <div class="resultdiv result4">
+                <div class="res-text">
+                    <h2><span>Seid ihr Menschen...?? <score>0</score> von <span class="result-max"> </span>!</span></h2>
+                </div>
+                <div class="star match-badge res-star4"><score>0</score></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="main" class="screen hidden">
+        <div class="header-spacer"></div>
+        <div id="quiz-wrapper" class="frame">
+
+        </div>
+        <!-- quiz-wrapper -->
+    </div>
+    <!-- end main -->
+    <footer>
+        <div id="timer" class="seqz-timer bgcoloreffect">
+            <div class="seqz-timerbar">
+
+            </div>
+        </div>
+        <div id="footer-status">
+          Frage <frage>1</frage> von <total>12</total> // <score>0</score> Pkt.
+        </div>
+    </footer>
+
+    <div id="bg" class="bg-image coloreffect no-scroll hidden"></div>
+
+    <div id="prototypes" style="display: none">
+        <div id="tpl-mp3" style="display: none">
+            <div id="{{id}}" data-index="{{ind}}" class="mp3 question hidden inactive">
+                <div class="counter">
+                    {{nr}}/{{total}}
+                </div>
+                <div class="frage">
+                    <h3><span>{{frage}}</span></h3>
+                </div>
+                <div class="antworten-wrapper">
+                    <div>
+                        Ich sage...
+                    </div>
+                    <div class="answers1">
+                        <div class="match-badge match-badge1 hidden">
+                            MATCH!
+                        </div>
+                        <div class="fail-badge fail-badge1 hidden">
+                            fail
+                        </div>
+                        <div data-ind="{{ind}}" data-a="1" data-index="1" class="antwort">
+                            {{a1}}
+                        </div>
+                        <div data-ind="{{ind}}" data-a="1" data-index="2" class="antwort">
+                            {{a2}}
+                        </div>
+                        <div data-ind="{{ind}}" data-a="1" data-index="3" class="antwort">
+                            {{a3}}
+                        </div>
+                    </div>
+                    <div>
+                        {{name2}} sagt...
+                    </div>
+                    <div class="answers2">
+                        <div class="match-badge match-badge2 hidden">
+                            MATCH!
+                        </div>
+                        <div class="fail-badge fail-badge2 hidden">
+                            fail
+                        </div>
+                        <div data-ind="{{ind}}" data-a="2" data-index="1" class="antwort">
+                            {{a1}}
+                        </div>
+                        <div data-ind="{{ind}}" data-a="2" data-index="2" class="antwort">
+                            {{a2}}
+                        </div>
+                        <div data-ind="{{ind}}" data-a="2" data-index="3" class="antwort">
+                            {{a3}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- prototypes -->
+</body>
+
+</html>

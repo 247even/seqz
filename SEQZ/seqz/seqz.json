@@ -1,0 +1,18 @@
+{
+    "id": 12345,
+    "Player1": "Uschi",
+    "Player2": "Ulli",
+    "Timer": 60,
+    "Fragen": [
+      {
+        "Typ": "mp3",
+        "Frage": "Welche Farbe {{oppo}}  hat der Himmel?",
+        "Antworten": ["rot", "grün", "blau"]
+      },
+      {
+        "Typ": "mp3",
+        "Frage": "Noch eine zweite Frage?",
+        "Antworten": ["Antwort eins", "Antwort zwei", "Antwort drei"]
+      }
+    ]
+}
