@@ -1,3 +1,32 @@
+function headRequest(url, cb) {
+    console.log("headRequest: "+url);
+    var req = new XMLHttpRequest();
+    req.open('HEAD', url);
+    req.onreadystatechange = function(e) {
+        //console.log(e);
+        if (req.readyState == 4 && req.status == 200) {
+            var lastMod = req.getResponseHeader("Last-Modified");
+            console.log(lastMod);
+            localStorage.setItem(url+'_lastMod', lastMod);
+            if (cb) {
+                cb();
+            }
+        } else {
+            //console.log("file not found");
+        }
+    }
+    req.send();
+};
+
+function checkHead(url) {
+    var checkHead = setInterval(
+        function() {
+            //if (!busy) {
+            headRequest(url);
+            //}
+        }, 20000);
+};
+
 function loadJSON(url, fn) {
     var req = new XMLHttpRequest();
     req.open('GET', url, true);
@@ -9,7 +38,7 @@ function loadJSON(url, fn) {
             console.log(seqz);
             fn();
         } else {
-          // some error handling tba...
+            // some error handling tba...
         }
     };
 
@@ -22,7 +51,7 @@ function loadJSON(url, fn) {
 
 function deleteJSON(id, fn) {
     var req = new XMLHttpRequest();
-    req.open('GET', 'polling.php?del='+id, true);
+    req.open('GET', 'polling.php?del=' + id, true);
 
     req.onload = function() {
         if (req.status >= 200 && req.status < 400) {
@@ -30,7 +59,7 @@ function deleteJSON(id, fn) {
             //console.log(req.responseText);
             fn();
         } else {
-          // some error handling tba...
+            // some error handling tba...
         }
     };
 
@@ -45,9 +74,9 @@ function pollSeqz() {
 
     function doPoll() {
         console.log('doPoll()...');
-        if(busy){
-          console.log('busy: '+busy);
-          return false;
+        if (busy) {
+            console.log('busy: ' + busy);
+            return false;
         }
 
         var req = new XMLHttpRequest();
@@ -86,7 +115,7 @@ function pollSeqz() {
                 }
 
                 if (readyPending) {
-                    console.log('readyPending: '+readyPending);
+                    console.log('readyPending: ' + readyPending);
                     checkReady();
                     return false;
                 }
@@ -104,7 +133,7 @@ function pollSeqz() {
                 //fn();
                 //busy = false;
             } else {
-              // some kind of error handling tba...
+                // some kind of error handling tba...
             }
         };
         req.onerror = function() {

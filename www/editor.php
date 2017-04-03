@@ -37,8 +37,8 @@ if(isset($_POST['id']) && isset($_POST['seqz'])) {
 	$ip = get_ip();
   $id = $_POST['id'];
   $data = $_POST['seqz'];
-  saveFileAs($data, "./seqz/".$id."_seqz.json");
-	saveFileAs($data, "./seqz/bu/".$id."_seqz_".$ip."_".$t.".json");
+  saveFileAs($data, "./data/seqz/".$id."_seqz.json");
+	saveFileAs($data, "./data/seqz/bu/".$id."_seqz_".$ip."_".$t.".json");
   echo $id;
 }
 

@@ -37,10 +37,10 @@ function saveFileAs($content, $target) {
 if(isset($_GET['del'])) {
 	$u = 0;
 	$id = $_GET['del'];
-	if(unlink("./responses/".$id."_1.json")){
+	if(unlink("./data/responses/".$id."_1.json")){
 		$u++;
 	}
-	if(unlink("./responses/".$id."_2.json")){
+	if(unlink("./data/responses/".$id."_2.json")){
 		$u++;
 	}
 	echo $u;
@@ -62,7 +62,7 @@ if(isset($_GET['id']) && isset($_GET['u'])) {
 
     if(isset($id) && isset($user)) {
       $data = '{"ip":"'.$ip.'","id":"'.$id.'","u":'.$user.',"t":'.$t.',"ri":'.$ri.',"ai":'.$ai.',"a1":'.$a1.',"a2":'.$a2.',"ti":'.$ti.'}';
-      saveFileAs($data, "./responses/".$id."_".$user.".json");
+      saveFileAs($data, "./data/responses/".$id."_".$user.".json");
     } else {
       //echo "nope";
     }
@@ -72,7 +72,7 @@ if(isset($_GET['id']) && isset($_GET['u'])) {
       $r_user = 2;
     }
 
-		$response = @file_get_contents("./responses/".$id."_".$r_user.".json");
+		$response = @file_get_contents("./data/responses/".$id."_".$r_user.".json");
 		if($response){
 			echo $response;
 		} else {
