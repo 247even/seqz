@@ -16,10 +16,10 @@ var seqz = {
     "time": [],
     "time1": [],
     "time2": [],
-    "timeBonus1" : [],
-    "timeBonus2" : [],
-    "timeBonus" : [],
-    "score" : null,
+    "timeBonus1": [],
+    "timeBonus2": [],
+    "timeBonus": [],
+    "score": null,
     "activeIndex": -1,
     "readyIndex": -1
 }
@@ -36,6 +36,35 @@ ready(function() {
 
     window.localStorage.clear();
 
+    $('#seqz-id-input').val('').on('change keyup', function(e) {
+        if (e.keyCode == 32) {
+            //e.preventDefault();
+            //e.stopPropagation();
+            //$(this).val($(this).val().trim());
+            //console.log('space');
+            //return false;
+        }
+        var val = $(this).val().trim();
+        $(this).val(val);
+
+        if (!val || val.length <= 4){
+          $('#seqz-id-button').attr('disabled', true);          
+          return false;
+        }
+
+        if (val.length > 4) {
+          $('#seqz-id-button').attr('disabled', false);
+        }
+    });
+
+    $('#seqz-id-button').on('click', function(e) {
+        e.preventDefault();
+        var val = $('#seqz-id-input').val().trim();
+        if (val) {
+
+        }
+    });
+
     /*
         $(window).on('load resize', debounce(
             function() {
@@ -50,7 +79,7 @@ ready(function() {
         seqzSource = 'data/seqz/' + query + '_seqz.json';
     }
 
-//    checkHead('responses/'+seqz.id+'_'+seqz.user+'.json');
+    //    checkHead('responses/'+seqz.id+'_'+seqz.user+'.json');
     headRequest('data/responses/uschi3ulli_1.json');
 
 

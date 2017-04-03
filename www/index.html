@@ -43,7 +43,7 @@
     <div id="splash" class="screen splash hidden">2x!</div>
     <div id="bonus-splash" class="screen splash hidden">100</div>
 
-    <header>
+    <header class="hidden">
         <div id="header-logo" class="logo-bg coloreffect">
           SEQZ!
         </div>
@@ -59,17 +59,15 @@
             <div id="login-logo" class="logo-bg coloreffect">
               SEQZ!
             </div>
+
+            <div id="seqz-id" class="row">
+                <input id="seqz-id-input" placeholder="deine-seqz-id" />
+                <button id="seqz-id-button" class="button" disabled>Los geht's!</button>
+            </div>
+
             <div id="log-in">
                 <button id="log-player1" data-player="1" class="playerselect button">Hallo Spieler 1!</button>
                 <button id="log-player2" data-player="2" class="playerselect button">Hallo Spieler 2!</button>
-                <!--
-                <div id="log-player1" data-player="1" class="playerselect">
-                    Hallo Player1!
-                </div>
-                <div id="log-player2" data-player="2" class="playerselect">
-                    Hallo Player2!
-                </div>
-              -->
             </div>
         </div>
     </div>
@@ -132,7 +130,7 @@
         <!-- quiz-wrapper -->
     </div>
     <!-- end main -->
-    <footer>
+    <footer class="hidden">
         <div id="timer" class="seqz-timer bgcoloreffect">
             <div class="seqz-timerbar">
 

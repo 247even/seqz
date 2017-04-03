@@ -15,9 +15,7 @@ body {
 }
 
 #editor-main textarea, #fragen-edit, #fragen-label, #comfort-editor input, #comfort-editor textarea, .btn, .name-input {
-    font-family: 'Roboto Mono', monospace;
-    font-size: 1rem;
-    padding: 5px 5px 5px 10px;
+    padding: 0.5rem 0.5rem 0.5rem 1rem;
 }
 
 .label-span {
@@ -28,10 +26,6 @@ body {
 
 .label-span, .divTableBody, #fragen-edit, #fragen-label {
   background-color: #fff;
-}
-
-.name-input, .btn {
-    font-size: 1rem;
 }
 
 .btn, .btn:active {
