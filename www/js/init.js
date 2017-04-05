@@ -1,5 +1,6 @@
 var seqz = {
     "id": "0000",
+    "pw": null,
     "Player1": "Uschi",
     "Player2": "Ulli",
     "User": false,
@@ -29,14 +30,28 @@ var response;
 var playerPending = true;
 var readyPending = true;
 var busy = true;
-var seqzSource = 'seqz/seqz.json';
+var seqzSource = null;
 var testMode = true;
+var query = getQuerySeqz();
+console.log("Query: " + query);
 
 ready(function() {
 
     window.localStorage.clear();
+    $('#seqz-id-input').val('');
+    idButtonDisable(true)
 
-    $('#seqz-id-input').val('').on('change keyup', function(e) {
+    if (query) {
+        seqzSource = 'data/seqz/' + query + '_seqz.json';
+        $('#seqz-id-input').val(query);
+        fileExists('./data/seqz/' + query + '_seqz.json', function(exists) {
+            if (exists) {
+                idButtonDisable(false)
+            }
+        });
+    }
+
+    $('#seqz-id-input').on('change keyup', function(e) {
         if (e.keyCode == 32) {
             //e.preventDefault();
             //e.stopPropagation();
@@ -47,13 +62,18 @@ ready(function() {
         var val = $(this).val().trim();
         $(this).val(val);
 
-        if (!val || val.length <= 4){
-          $('#seqz-id-button').attr('disabled', true);          
-          return false;
+        if (!val || val.length <= 4) {
+            idButtonDisable(true)
+            return false;
         }
 
         if (val.length > 4) {
-          $('#seqz-id-button').attr('disabled', false);
+
+            fileExists('./data/seqz/' + val + '_seqz.json', function(exists) {
+                if (exists) {
+                    idButtonDisable(false)
+                }
+            });
         }
     });
 
@@ -61,7 +81,8 @@ ready(function() {
         e.preventDefault();
         var val = $('#seqz-id-input').val().trim();
         if (val) {
-
+            seqzSource = 'data/seqz/' + val + '_seqz.json';
+            loadSeqz();
         }
     });
 
@@ -74,25 +95,9 @@ ready(function() {
             }, 200, false));
         */
 
-    // wait for js to be loaded
-    if (query) {
-        seqzSource = 'data/seqz/' + query + '_seqz.json';
-    }
-
     //    checkHead('responses/'+seqz.id+'_'+seqz.user+'.json');
     headRequest('data/responses/uschi3ulli_1.json');
 
-
-    loadJSON(seqzSource, function() {
-
-        deleteJSON(seqz.id, function() {
-            //seqzTimer();
-            //stopSeqzTimer();
-            //seqz.activeIndex = 0;
-            setPlayers();
-            //buildSeqz();
-            //setActive('id1');
-        })
-    });
+    loadSeqz();
 
 });

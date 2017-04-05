@@ -81,7 +81,7 @@ function seqzTimer(cb, ts) {
     window.stimer = setInterval(function() {
           t = t + taktung;
           sqt = t;
-          console.log(sqt);
+          //console.log(sqt);
           // tm = Prozent
           var tm = (t / timeset) * 100;
           $('.seqz-timer .seqz-timerbar').css('margin-left', tm+'%');
@@ -141,8 +141,6 @@ function getQueryVariable(variable){
 function getQuerySeqz(variable){
        return window.location.search.substring(1) ? window.location.search.substring(1) : false;
 }
-var query = getQuerySeqz();
-console.log(query);
 
 ///////////////
 /*

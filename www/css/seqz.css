@@ -28,6 +28,7 @@
   -webkit-user-select : none;
   user-select         : none;
   cursor              : default;
+  text-decoration: none;
 }
 
 html {
@@ -51,10 +52,6 @@ html {
 body {
   color     : #000000;
   font-size : 1.8rem;
-}
-
-a {
-  text-decoration: none;
 }
 
 .h1,
@@ -149,6 +146,10 @@ textarea {
 button,
 input,
 textarea {
+  -moz-user-select    : text;
+  -ms-user-select     : text;
+  -webkit-user-select : text;
+  user-select: text;
   cursor : auto;
 }
 

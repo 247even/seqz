@@ -1,3 +1,34 @@
+function idButtonDisable(st) {
+    if (st === true) {
+        $('#seqz-id-button').val('kein EQZ').attr('disabled', true);
+        return false;
+    }
+
+    $('#seqz-id-button').val("Los geht's!").attr('disabled', false);
+};
+
+function loadSeqz(del) {
+    if (!seqzSource) {
+        console.log("no seqzSource");
+        return false;
+    }
+
+    loadJSON(seqzSource, function() {
+        if (del) {
+            deleteJSON(seqz.id, function() {
+                //seqzTimer();
+                //stopSeqzTimer();
+                //seqz.activeIndex = 0;
+                setPlayers();
+                //buildSeqz();
+                //setActive('id1');
+            })
+        } else {
+            setPlayers();
+        }
+    });
+};
+
 function setPlayers() {
     $('#log-player1').html("Hallo " + seqz.Player1 + "!");
     $('#log-player2').html("Hallo " + seqz.Player2 + "!");
@@ -25,7 +56,7 @@ function checkPlayers() {
 
     if (testMode) {
         response.u = 1;
-        console.log("testMode Player set");
+        console.log("testMode Opponent set: "+response.u);
     }
 
     if (typeof response.u == 'undefined') {
@@ -33,13 +64,16 @@ function checkPlayers() {
         busy = false;
         return false;
     }
-    if (seqz.User === response.u) {
+
+    console.log("seqz.User: "+seqz.User);
+    if (seqz.User == response.u) {
         console.log("checkPlayers: matching players");
         busy = false;
         return false;
     }
 
     seqz.Opponent = response.u;
+
     localStorage.setItem('seqz' + seqz.id + '_user', seqz.User);
     console.log("You are: " + seqz['Player' + seqz.User]);
     console.log("Your opponent: " + seqz['Player' + seqz.Opponent]);
@@ -58,6 +92,8 @@ function checkPlayers() {
         $(this).hide();
         $('#readyscreen').one(aniend, function() {
             //$(this).show();
+            $('header').show().animateCss('fadeInDown');
+            $('footer').show().animateCss('fadeInUp');
             $('#readybutton').show().animateCss('fadeInUp');
         }).show().animateCss('fadeIn');
     }).animateCss('fadeOut');
@@ -301,7 +337,7 @@ function checkMatch() {
     seqz.timeBonus2[ai] = 0;
 
     if (testMode) {
-      response.ti = seqz.time;
+        response.ti = seqz.time;
     }
 
     if (response.a2[ai] == seqz.answers1[ai]) {
@@ -337,7 +373,7 @@ function checkMatch() {
     seqz['result'][ai] = match;
 
     var tBonus = seqz.timeBonus1[ai];
-    console.log('response.ti: '+response.ti);
+    console.log('response.ti: ' + response.ti);
     if (parseInt(response.ti) > seqz.time) {
         console.log(response.ti + '>' + seqz.time);
         seqz.time = response.ti;
@@ -374,19 +410,19 @@ function checkMatch() {
                     "timeOut": "4000",
                 };
 
-                setTimeout(function(){
+                setTimeout(function() {
                     toastr.success('+50 P', 'Match 1:');
                     seqz.score = seqz.score + 50;
                     $('score').html(seqz.score);
                 }, 500);
 
-                setTimeout(function(){
+                setTimeout(function() {
                     toastr.success('+50 P', 'Match 2:');
                     seqz.score = seqz.score + 50;
                     $('score').html(seqz.score);
                 }, 1000);
 
-                setTimeout(function(){
+                setTimeout(function() {
                     if (seqz.timeBonus[ai] > 1) {
                         toastr.success('+' + seqz.timeBonus[ai] + 'P', 'Zeit-Bonus:');
                         seqz.score = seqz.score + seqz.timeBonus[ai];
