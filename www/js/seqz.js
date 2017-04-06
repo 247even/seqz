@@ -30,8 +30,14 @@ function loadSeqz(del) {
 };
 
 function setPlayers() {
-    $('#log-player1').html("Hallo " + seqz.Player1 + "!");
-    $('#log-player2').html("Hallo " + seqz.Player2 + "!");
+    $('.log-player1').html("Hallo " + seqz.Player1 + "!");
+    $('.log-player2').html("Hallo " + seqz.Player2 + "!");
+    if (getQuerySeqz("user")){
+        seqz.User = getQuerySeqz("user");
+        var oppo = seqz.User == 1 ? 2 : 1;
+        $('.playerselect[data-player='+seqz.User+']').addClass('selected').detach().prependTo('#log-in');
+        $('.log-player'+oppo).html("Ich bin " + seqz['Player'+oppo] + ".").addClass('unselected');
+    }
     $('.playerselect').on('mousedown', function(e) {
         e.preventDefault();
         seqz.User = $(this).attr("data-player");
