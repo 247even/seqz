@@ -1,6 +1,6 @@
 var newSeqz;
 var total = 0;
-var query = getQuerySeqz();
+var queryId = getQuerySeqz("id");
 
 function setStatus(t) {
     var t = t ? t : total;
@@ -327,14 +327,14 @@ ready(function() {
     resetComfort();
     setStatus();
 
-    if (query) {
-      fileExists('./data/seqz/' + query + '_seqz.json', function(exists) {
+    if (queryId) {
+      fileExists('./data/seqz/' + queryId + '_seqz.json', function(exists) {
           if (exists) {
-              loadEditorSeqz('./data/seqz/' + query + '_seqz.json');
+              loadEditorSeqz('./data/seqz/' + queryId + '_seqz.json');
               return false;
           }
 
-          toastr.info('SEQZ "' + query +'" ist unbekannt.');
+          toastr.info('SEQZ "' + queryId +'" ist unbekannt.');
       });
     }
 
@@ -360,7 +360,7 @@ ready(function() {
         newSeqz.id = makeId(newSeqz.Player1 + newSeqz.Player2 + $.now());
     }).on('keydown', function(e){
         var key = e.keyCode;
-        if(!(key >= 65 && key <= 120) && (key != 32 && key != 0)) {
+        if(!(key >= 65 && key <= 120) && (key != 32 && key != 0 && key != 8)) {
           e.preventDefault();
           console.log("Char not allowed");
           return false;

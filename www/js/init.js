@@ -32,8 +32,8 @@ var readyPending = true;
 var busy = true;
 var seqzSource = null;
 var testMode = true;
-var query = getQuerySeqz();
-console.log("Query: " + query);
+var queryId = getQuerySeqz("id");
+console.log("queryId: " + queryId);
 
 ready(function() {
 
@@ -41,10 +41,10 @@ ready(function() {
     $('#seqz-id-input').val('');
     idButtonDisable(true)
 
-    if (query) {
-        seqzSource = 'data/seqz/' + query + '_seqz.json';
-        $('#seqz-id-input').val(query);
-        fileExists('./data/seqz/' + query + '_seqz.json', function(exists) {
+    if (queryId) {
+        seqzSource = 'data/seqz/' + queryId + '_seqz.json';
+        $('#seqz-id-input').val(queryId);
+        fileExists('./data/seqz/' + queryId + '_seqz.json', function(exists) {
             if (exists) {
                 idButtonDisable(false)
             }
