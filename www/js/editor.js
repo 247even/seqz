@@ -1,37 +1,6 @@
-function saveSeqz(id) {
-    var http = new XMLHttpRequest();
-    http.open("POST", "editor.php", true);
-    http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    http.onreadystatechange = function() {
-        if (http.readyState == 4 && http.status == 200) {
-            console.log(http.responseText);
-            var location = window.location;
-            location = location.href.split('seqz');
-            console.log(location);
-            $('#seqzUrl').val(location[0] + 'seqz/?' + http.responseText);
-        }
-    }
-    var data = localStorage.getItem('newSeqz_' + newSeqz.id);
-    console.log(data);
-    if (data) {
-        http.send(data);
-    }
-};
-
-function checkOverwrite(url, cb) {
-    var httpux = new XMLHttpRequest();
-    httpux.open('HEAD', url);
-    httpux.onreadystatechange = function() {
-        if (http.readyState == 4 && http.status == 200) {
-            if (window.confirm("File exists. Overwrite?")) {
-                cb();
-            };
-        } else {
-            cb();
-        }
-    }
-    httpux.send();
-};
+var newSeqz;
+var total = 0;
+var query = getQuerySeqz();
 
 function setStatus(t) {
     var t = t ? t : total;
@@ -93,112 +62,6 @@ function checkValid() {
     $('#fragen-area').val(fragenObjects.join('\n\n'));
 };
 
-function buildQuickSeqz() {
-    var errors = 0;
-    var frageObject;
-    var i;
-    var fId = 0;
-    var fSub = 0;
-    var valid = 0;
-    var Fragen = [];
-    var passwort = $('#password').val();
-    var fragenVal = $('#fragen-area').val();
-
-    if (!fragenVal || fragenVal == '\n' || fragenVal == ' ') {
-        console.log('no val');
-        $('#fragen-area').val('');
-        setStatus(0);
-        return false;
-    }
-
-    // regex windows vs mac/linux:
-    fragenVal = fragenVal.replace(/\r\n/g, '\n');
-
-    // nothing to do:
-    if (!fragenVal.includes('\n')) {
-        console.log('no "n" found ');
-        setStatus(0);
-        return false;
-    }
-
-    // prevent triple linebreaks:
-    if (fragenVal.includes('\n\n\n')) {
-        console.log('"nnn" found ');
-        fragenVal = fragenVal.replace(/\n\n\n/g, '\n\n');
-        $('#fragen-area').val(fragenVal);
-        return false;
-    }
-
-    if (!fragenVal.includes('\n\n')) {
-        console.log('no "nn" found ');
-        return false;
-    }
-
-    if (fragenVal.endsWith('\n\n')) {
-
-    }
-
-    var fragenObjects = fragenVal.trim().split('\n\n');
-    // remove empty values:
-    fragenObjects = fragenObjects.filter(function() {
-        return true;
-    });
-
-    //console.log(fragenObjects.count(''));
-    console.log("fragenObjects:");
-    console.log(fragenObjects);
-    var fOl = fragenObjects.length;
-    for (var i = 0; i < fOl; i++) {
-
-        frageOutput = null;
-        frageOutput = {};
-        frageOutput['Frage'] = null;
-        frageOutput['Antworten'] = [];
-
-        if (!fragenObjects[i]) {
-            break;
-        }
-        var frageObject = fragenObjects[i].split('\n');
-        frageObject = frageObject.filter(function() {
-            return true;
-        });
-        var frl = frageObject.length;
-
-        if (frl == 1) {
-            console.log('keine Antwort');
-            fragenObjects.splice(i + 1, 1);
-            fragenObjects[i] = fragenObjects[i] + '\n';
-            $('#fragen-area').val(fragenObjects.join('\n\n'));
-            return false;
-        }
-        if (frl == 2) {
-            console.log('zu wenige Antworten');
-            fragenObjects.splice(i + 1, 1);
-            fragenObjects[i] = fragenObjects[i];
-            $('#fragen-area').val(fragenObjects.join('\n\n'));
-            return false;
-        }
-
-        for (var j = 0; j < frl; j++) {
-            if (frageObject[j]) {
-                if (j === 0) {
-                    frageOutput.Frage = frageObject[j].trim();
-                }
-                if (j > 0) {
-                    frageOutput.Antworten.push(frageObject[j].trim());
-                }
-            }
-        }
-
-        Fragen.push(frageOutput);
-    }
-
-    newNewSeqz();
-
-    localStorage.setItem('newSeqz_' + newSeqz.id, 'id=' + newSeqz.id + '&seqz=' + JSON.stringify(newSeqz) + '&t=' + Date.now());
-    newSeqzOutput()
-};
-
 function newNewSeqz() {
 
     if (!newSeqz) {
@@ -208,31 +71,37 @@ function newNewSeqz() {
           $('#name1').focus();
           return false;
         }
-        
+
         if(!$('#name2').val()){
           toastr.info('Spieler 2 fehlt!');
           $('#name2').focus();
           return false;
         }
 
-        var player1 = $('#name1').val();
-        var player2 = $('#name2').val();
-        var id = (player1 + player2).toLowerCase();
-        var passwort = $('#password').val();
+        var player1 = $('#name1').val().trim();
+        var player2 = $('#name2').val().trim();
+//        var id = (player1 + player2).toLowerCase();
+        var id = makeId(player1 + player2 + $.now());
+
+        //var passwort = $('#password').val().trim();
+        var passwort;
 
         newSeqz = {
             "id": id,
             "Player1": player1,
             "Player2": player2,
-            "Fragen": []
+            "Fragen": [],
+            "md5": null
         };
+
+        console.log(newSeqz);
 
         if (passwort) {
             newSeqz['Passwort'] = passwort;
         }
 
-        localStorage.setItem('newSeqz_' + newSeqz.id, 'id=' + newSeqz.id + '&seqz=' + JSON.stringify(newSeqz) + '&t=' + Date.now());
-
+        //localStorage.setItem('newSeqz_' + newSeqz.id, 'id=' + newSeqz.id + '&seqz=' + JSON.stringify(newSeqz) + '&t=' + Date.now());
+        setEditorData();
     }
 
 };
@@ -242,7 +111,8 @@ function pushNewSeqz(frage) {
 
     newNewSeqz();
     newSeqz.Fragen.push(frage);
-    localStorage.setItem('newSeqz_' + newSeqz.id, 'id=' + newSeqz.id + '&seqz=' + JSON.stringify(newSeqz) + '&t=' + Date.now());
+    //localStorage.setItem('newSeqz_' + newSeqz.id, 'id=' + newSeqz.id + '&seqz=' + JSON.stringify(newSeqz) + '&t=' + Date.now());
+    setEditorData();
     saveSeqz();
 
     var key = newSeqz.Fragen.length - 1;
@@ -353,7 +223,8 @@ function updateNewSeqz() {
 
     });
 
-    localStorage.setItem('newSeqz_' + newSeqz.id, 'id=' + newSeqz.id + '&seqz=' + JSON.stringify(newSeqz) + '&t=' + Date.now());
+    //localStorage.setItem('newSeqz_' + newSeqz.id, 'id=' + newSeqz.id + '&seqz=' + JSON.stringify(newSeqz) + '&t=' + Date.now());
+    setEditorData();
     saveSeqz();
 
     if (newSeqz.Fragen.length < 1) {
@@ -363,12 +234,10 @@ function updateNewSeqz() {
     console.log(newSeqz);
 };
 
-var newSeqz;
-var total = 0;
 
 function jumpNextInput(e) {
 
-}
+};
 
 function buildComfortSeqz() {
     var fr = $('#comfort-frage').val().trim();
@@ -409,15 +278,19 @@ function buildComfortSeqz() {
     });
 
     pushNewSeqz(frageOutput);
+    //addHash();
 
     //newSeqzOutput();
     resetComfort();
-}
+};
 
 function resetComfort() {
+    $('input').val('');
+    //$('#seqzId').val('');
+    //$('#seqzUrl').val('');
     $('#comfort-editor textarea').val('').focus();
-    $('#comfort-editor input').val('');
-}
+    //$('#comfort-editor input').val('');
+};
 
 /*
 function setInview() {
@@ -449,11 +322,22 @@ function setInview() {
 
 var inview;
 */
-var newSeqz;
 
 ready(function() {
     resetComfort();
     setStatus();
+
+    if (query) {
+      fileExists('./data/seqz/' + query + '_seqz.json', function(exists) {
+          if (exists) {
+              loadEditorSeqz('./data/seqz/' + query + '_seqz.json');
+              return false;
+          }
+
+          toastr.info('SEQZ "' + query +'" ist unbekannt.');
+      });
+    }
+
     //setInview();
     // trigger click outside:
     $(document).on('mouseup', function(e) {
@@ -473,7 +357,14 @@ ready(function() {
         }
         newSeqz.Player1 = $('#name1').val().trim();
         newSeqz.Player2 = $('#name2').val().trim();
-        newSeqz.id = (newSeqz.Player1 + newSeqz.Player2).toLowerCase();
+        newSeqz.id = makeId(newSeqz.Player1 + newSeqz.Player2 + $.now());
+    }).on('keydown', function(e){
+        var key = e.keyCode;
+        if(!(key >= 65 && key <= 120) && (key != 32 && key != 0)) {
+          e.preventDefault();
+          console.log("Char not allowed");
+          return false;
+        }
     });
 
     $('#comfort-editor .noenter').on('keydown', function(e) {
@@ -565,9 +456,14 @@ ready(function() {
         window.open(url, '_blank', '');
     });
 
-    $('.copy-button').on('click', function(){
+    $('#copy-url-button').on('click', function(){
         $('#seqzUrl').select();
         var url = $('#seqzUrl').val();
+
+        if(!url){
+          return false;
+        }
+
         try {
           if (document.execCommand('copy')){
             toastr.info('SEQZ-URL in die Zwischenablage kopiert');
@@ -579,5 +475,21 @@ ready(function() {
         }
     });
 
+    $('#copy-id-button').on('click', function(){
+        $('#seqzId').select();
+        var id = $('#seqzId').val();
+        if(!id){
+          return false;
+        }
+        try {
+          if (document.execCommand('copy')){
+            toastr.info('SEQZ-ID in die Zwischenablage kopiert');
+          };
+          //var msg = successful ? 'successful' : 'unsuccessful';
+          //console.log('Copying text command was ' + msg);
+        } catch (err) {
+          console.log('Oops, unable to copy');
+        }
+    });
 
 });

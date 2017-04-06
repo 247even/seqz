@@ -1,38 +1,4 @@
-var feTimeout;
 
-function fileExists(url, cb) {
-    clearTimeout(feTimeout);
-    var req = new XMLHttpRequest();
-    req.open('HEAD', url);
-    req.onreadystatechange = function() {
-        var exists = false;
-        if (req.readyState < 4) {
-            feBusy = true;
-        }
-        if (req.readyState == 4 && req.status == 200) {
-            exists = true;
-            console.log(url + ' exists');
-        }
-        if (req.readyState == 4) {
-            if (cb) {
-                cb(exists);
-            }
-        }
-    }
-
-    feTimeout = setTimeout(
-        function() {
-            try {
-              req.send()
-            }
-            catch (err) {
-              //console.log(err);
-            }
-        },
-        300
-    );
-
-};
 
 function headRequest(url, cb) {
     console.log("headRequest: " + url);

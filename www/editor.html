@@ -19,6 +19,8 @@
     <script src="js/noframework.waypoints.min.js"></script>
     <script src="js/inview.min.js"></script>
     <script src="js/funcs.js"></script>
+    <script src="js/editor-funcs.js"></script>
+    <script src="js/md5.min.js"></script>
     <script src="js/editor.js"></script>
     <script src="js/seqz.js"></script>
     <link rel="stylesheet" href="css/normalize.css">
@@ -42,7 +44,7 @@
 
     <div id="editor-content" class="content-wrapper">
         <div class="frage">
-            <h3><span>Jetzt hier SEQZ machen!</span></h3>
+            <h3><span>Jetzt hier SEQZ machen:</span></h3>
         </div>
 
         <div class="spacer" style="clear:both;">
@@ -58,13 +60,13 @@
                     <div class="divTableRow">
                         <div class="divTableCell">Spieler 1:</div>
                         <div class="divTableCell">
-                            <input id="name1" class="name-input ta-center" tabindex="1" type="text" placeholder="Spieler 1" />
+                            <input id="name1" class="name-input" tabindex="1" type="text" placeholder="Spieler 1" />
                         </div>
                     </div>
                     <div class="divTableRow">
                         <div class="divTableCell">Spieler 2:</div>
                         <div class="divTableCell">
-                            <input id="name2" class="name-input ta-center" tabindex="2" type="text" placeholder="Spieler 2" />
+                            <input id="name2" class="name-input" tabindex="2" type="text" placeholder="Spieler 2" />
                         </div>
                     </div>
                 </div>
@@ -181,6 +183,27 @@
             <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==">
         </div>
 
+        <div id="id-row" class="form-row">
+            <div class="">
+                <span class="label-span"><h6>SEQZ-ID:</h6></span>
+            </div>
+            <div class="divTable">
+                <div class="divTableBody">
+                    <div class="divTableRow">
+                        <div class="divTableCell">ID:</div>
+                        <div class="divTableCell">
+                            <input id="seqzId" class="seqzUrl" type="text" readonly/>
+                        </div>
+                        <div class="divTableCell">
+                            <span id="copy-id-button" class="copy-button icon" title="copy">
+
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div id="url-row" class="form-row">
             <div class="">
                 <span class="label-span"><h6>SEQZ:</h6></span>
@@ -193,7 +216,7 @@
                             <input id="seqzUrl" class="seqzUrl" type="text" readonly/>
                         </div>
                         <div class="divTableCell">
-                            <span class="copy-button icon" title="copy">
+                            <span id="copy-url-button" class="copy-button icon" title="copy">
 
                             </span>
                         </div>
