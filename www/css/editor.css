@@ -5,7 +5,10 @@
 
 body {
     overflow: auto!important;
-    margin: 50px 0 0 0;
+}
+
+#editor-main {
+
 }
 
 .content-wrapper {

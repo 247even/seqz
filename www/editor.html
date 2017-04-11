@@ -18,6 +18,7 @@
     <script src="js/toastr.min.js"></script>
     <script src="js/noframework.waypoints.min.js"></script>
     <script src="js/inview.min.js"></script>
+    <script src="js/circles.js"></script>
     <script src="js/funcs.js"></script>
     <script src="js/editor-funcs.js"></script>
     <script src="js/md5.min.js"></script>
@@ -31,6 +32,13 @@
 </head>
 
 <body class="bg-image">
+  <div id="circle-container" class="circle-container">
+    <div id="circles4" class="circle-container blur1"> </div>
+    <div id="circles3" class="circle-container blur2"> </div>
+    <div id="circles2" class="circle-container blur2"> </div>
+    <div id="circles1" class="circle-container blur3"> </div>
+    <div id="circles0" class="circle-container blur2"> </div>
+  </div>
   <header>
       <div id="header-logo" class="logo-bg coloreffect">
         SEQZ!
@@ -42,6 +50,8 @@
 
   <div class="header-spacer"></div>
 
+  <div id="editor-main" class="screen">
+    <div class="header-spacer"></div>
     <div id="editor-content" class="content-wrapper">
         <div class="frage">
             <h3><span>Jetzt hier SEQZ machen:</span></h3>
@@ -241,6 +251,8 @@
         </div>
     </div>
 
+  </div>
+
     <div id="bottom" class="bottom" style="clear:both">
     </div>
 
@@ -257,24 +269,24 @@
                         <div class="divTableRow">
                             <div class="divTableCellLabel">Frage:</div>
                             <div class="divTableCell">
-                                <textarea id="comfort-frage" class="noenter" tabindex="1" rows="2" data-target="comfort-aw1"></textarea>
+                                <textarea id="comfort-frage" class="noenter" tabindex="3" rows="2" data-target="comfort-aw1"></textarea>
                             </div>
                         </div>
                         <div class="divTableRow">
                             <div class="divTableCellLabel">Antwort 1:</div>
-                            <div class="divTableCell"><input id="comfort-aw1" class="comfort-antwort noenter" tabindex="2" data-target="comfort-aw2" type="text" /></div>
+                            <div class="divTableCell"><input id="comfort-aw1" class="comfort-antwort noenter" tabindex="4" data-target="comfort-aw2" type="text" /></div>
                         </div>
                         <div class="divTableRow">
                             <div class="divTableCellLabel">Antwort 2:</div>
-                            <div class="divTableCell"><input id="comfort-aw2" class="comfort-antwort noenter" tabindex="3" data-target="comfort-aw3" type="text" /></div>
+                            <div class="divTableCell"><input id="comfort-aw2" class="comfort-antwort noenter" tabindex="5" data-target="comfort-aw3" type="text" /></div>
                         </div>
                         <div class="divTableRow">
                             <div class="divTableCellLabel aw-inactive">Antwort 3:</div>
-                            <div class="divTableCell"><input id="comfort-aw3" class="comfort-antwort noenter" tabindex="4" data-target="comfort-aw4" type="text" /></div>
+                            <div class="divTableCell"><input id="comfort-aw3" class="comfort-antwort noenter" tabindex="6" data-target="comfort-aw4" type="text" /></div>
                         </div>
                         <div class="divTableRow">
                             <div class="divTableCellLabel aw-inactive">Antwort 4:</div>
-                            <div class="divTableCell"><input id="comfort-aw4" class="comfort-antwort noenter" tabindex="5" type="text" /></div>
+                            <div class="divTableCell"><input id="comfort-aw4" class="comfort-antwort noenter" tabindex="7" type="text" /></div>
                         </div>
                     </div>
                 </div>

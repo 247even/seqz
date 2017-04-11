@@ -66,21 +66,21 @@ function newNewSeqz() {
 
     if (!newSeqz) {
 
-        if(!$('#name1').val()){
-          toastr.info('Spieler 1 fehlt!');
-          $('#name1').focus();
-          return false;
+        if (!$('#name1').val()) {
+            toastr.info('Spieler 1 fehlt!');
+            $('#name1').focus();
+            return false;
         }
 
-        if(!$('#name2').val()){
-          toastr.info('Spieler 2 fehlt!');
-          $('#name2').focus();
-          return false;
+        if (!$('#name2').val()) {
+            toastr.info('Spieler 2 fehlt!');
+            $('#name2').focus();
+            return false;
         }
 
         var player1 = $('#name1').val().trim();
         var player2 = $('#name2').val().trim();
-//        var id = (player1 + player2).toLowerCase();
+        //        var id = (player1 + player2).toLowerCase();
         var id = makeId(player1 + player2 + $.now());
 
         //var passwort = $('#password').val().trim();
@@ -113,7 +113,7 @@ function pushNewSeqz(frage) {
     newSeqz.Fragen.push(frage);
     //localStorage.setItem('newSeqz_' + newSeqz.id, 'id=' + newSeqz.id + '&seqz=' + JSON.stringify(newSeqz) + '&t=' + Date.now());
     setEditorData();
-    saveSeqz();
+    //saveSeqz();
 
     var key = newSeqz.Fragen.length - 1;
     console.log(newSeqz);
@@ -148,14 +148,14 @@ function pushNewSeqz(frage) {
     gotoBottom();
 
     if (newSeqz.Fragen.length == 1) {
-      $('#fragen-row').removeClass('hidden');
-      $('#speichern-row').removeClass('hidden').animateCss('fadeInDown');
+        $('#fragen-row').removeClass('hidden');
+        $('#speichern-row').removeClass('hidden').animateCss('fadeInDown');
     }
 
-/*
-    inview.destroy();
-    setInview();
-    */
+    /*
+        inview.destroy();
+        setInview();
+        */
 };
 
 function newSeqzOutput() {
@@ -192,10 +192,10 @@ function newSeqzOutput() {
         console.log("update");
         updateNewSeqz();
     });
-/*
-    inview.destroy();
-    setInview();
-    */
+    /*
+        inview.destroy();
+        setInview();
+        */
 
     gotoBottom();
 };
@@ -228,15 +228,10 @@ function updateNewSeqz() {
     saveSeqz();
 
     if (newSeqz.Fragen.length < 1) {
-      $('#speichern-row').addClass('hidden');
+        $('#speichern-row').addClass('hidden');
     }
     newSeqzOutput();
     console.log(newSeqz);
-};
-
-
-function jumpNextInput(e) {
-
 };
 
 function buildComfortSeqz() {
@@ -266,10 +261,10 @@ function buildComfortSeqz() {
     frageOutput['Antworten'] = [aw1, aw2];
 
     if (aw3) {
-      frageOutput.Antworten.push(aw3);
+        frageOutput.Antworten.push(aw3);
     }
     if (aw4) {
-      frageOutput.Antworten.push(aw4);
+        frageOutput.Antworten.push(aw4);
     }
 
     // remove empty values: bullshit?
@@ -288,7 +283,9 @@ function resetComfort() {
     $('input').val('');
     //$('#seqzId').val('');
     //$('#seqzUrl').val('');
-    $('#comfort-editor textarea').val('').focus();
+    $('#comfort-editor textarea').val('');
+    $('#name1').focus();
+
     //$('#comfort-editor input').val('');
 };
 
@@ -328,14 +325,14 @@ ready(function() {
     setStatus();
 
     if (queryId) {
-      fileExists('./data/seqz/' + queryId + '_seqz.json', function(exists) {
-          if (exists) {
-              loadEditorSeqz('./data/seqz/' + queryId + '_seqz.json');
-              return false;
-          }
+        fileExists('./data/seqz/' + queryId + '_seqz.json', function(exists) {
+            if (exists) {
+                loadEditorSeqz('./data/seqz/' + queryId + '_seqz.json');
+                return false;
+            }
 
-          toastr.info('SEQZ "' + queryId +'" ist unbekannt.');
-      });
+            toastr.info('SEQZ "' + queryId + '" ist unbekannt.');
+        });
     }
 
     //setInview();
@@ -351,19 +348,35 @@ ready(function() {
     });
 
     $('.name-input').on('change blur', function() {
-        if(!newSeqz){
+        if (!newSeqz) {
             newNewSeqz();
             return false;
         }
         newSeqz.Player1 = $('#name1').val().trim();
         newSeqz.Player2 = $('#name2').val().trim();
         newSeqz.id = makeId(newSeqz.Player1 + newSeqz.Player2 + $.now());
-    }).on('keydown', function(e){
+    }).on('keydown', function(e) {
         var key = e.keyCode;
-        if(!(key >= 65 && key <= 120) && (key != 32 && key != 0 && key != 8)) {
-          e.preventDefault();
-          console.log("Char not allowed");
-          return false;
+
+        if (key === 13) {
+            if ($('#name1').val() && $('#name2').val()) {
+              e.preventDefault();
+                $('#comfort-frage').focus();
+            }
+        }
+
+        if (key === 9 || key === 13) {
+            if (!$(this).val()) {
+                //e.preventDefault();
+                return false;
+            }
+
+        }
+
+        if (!(key >= 65 && key <= 120) && (key != 32 && key != 0 && key != 8 && key != 9 && key != 13)) {
+            e.preventDefault();
+            console.log("Char not allowed");
+            return false;
         }
     });
 
@@ -435,60 +448,60 @@ ready(function() {
             return false;
         }
         if (!newSeqz.Player1) {
-          toastr.info('Spieler 1 fehlt!');
-          return false;
+            toastr.info('Spieler 1 fehlt!');
+            return false;
         }
         if (!newSeqz.Player1) {
-          toastr.info('Spieler 2 fehlt!');
-          return false;
+            toastr.info('Spieler 2 fehlt!');
+            return false;
         }
         if (!newSeqz.id) {
-          console.log("no id");
-          return false;
+            console.log("no id");
+            return false;
         }
         //checkOverwrite('seqz/' + id + '_seqz.json', function(){
         saveSeqz();
         //});
     });
 
-    $('.link-button').on('click', function(e){
+    $('.link-button').on('click', function(e) {
         var url = $('#seqzUrl').val();
         window.open(url, '_blank', '');
     });
 
-    $('#copy-url-button').on('click', function(){
+    $('#copy-url-button').on('click', function() {
         $('#seqzUrl').select();
         var url = $('#seqzUrl').val();
 
-        if(!url){
-          return false;
+        if (!url) {
+            return false;
         }
 
         try {
-          if (document.execCommand('copy')){
-            toastr.info('SEQZ-URL in die Zwischenablage kopiert');
-          };
-          //var msg = successful ? 'successful' : 'unsuccessful';
-          //console.log('Copying text command was ' + msg);
+            if (document.execCommand('copy')) {
+                toastr.info('SEQZ-URL in die Zwischenablage kopiert');
+            };
+            //var msg = successful ? 'successful' : 'unsuccessful';
+            //console.log('Copying text command was ' + msg);
         } catch (err) {
-          console.log('Oops, unable to copy');
+            console.log('Oops, unable to copy');
         }
     });
 
-    $('#copy-id-button').on('click', function(){
+    $('#copy-id-button').on('click', function() {
         $('#seqzId').select();
         var id = $('#seqzId').val();
-        if(!id){
-          return false;
+        if (!id) {
+            return false;
         }
         try {
-          if (document.execCommand('copy')){
-            toastr.info('SEQZ-ID in die Zwischenablage kopiert');
-          };
-          //var msg = successful ? 'successful' : 'unsuccessful';
-          //console.log('Copying text command was ' + msg);
+            if (document.execCommand('copy')) {
+                toastr.info('SEQZ-ID in die Zwischenablage kopiert');
+            };
+            //var msg = successful ? 'successful' : 'unsuccessful';
+            //console.log('Copying text command was ' + msg);
         } catch (err) {
-          console.log('Oops, unable to copy');
+            console.log('Oops, unable to copy');
         }
     });
 

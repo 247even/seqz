@@ -5,10 +5,12 @@
 
 function circleSeqz() {
     var darkred = [
+        "#4B0000",
+        "#500000",
         "#B10E11",
         "#590004",
         "#8B010E",
-    ]
+    ];
 
     var red = [
         "#D21D26",
@@ -39,8 +41,8 @@ function circleSeqz() {
         "#FFFEFF"
     ];
 
-    var colorsBack = red.concat(pinkred, lightpink);
-    var colorsFront = yellow.concat(lightyellow);
+    var colors3 = lightpink.concat(pinkred);
+    var colors4 = yellow.concat(lightyellow);
 
     var delay = 150;
 
@@ -56,7 +58,7 @@ function circleSeqz() {
         var containerHeight = $(container).outerHeight();
         var containerWidth = $(container).outerWidth();
         var count = Math.floor((Math.random() * maxCount) + minCount);
-        $('#container').html();
+        $(container).html();
 
         for (var i = 0; i < count; i++) {
             setTimeout(function() {
@@ -67,11 +69,14 @@ function circleSeqz() {
                 var blur = Math.floor((Math.random() * 3) + 1);
 
                 // Prozent
-                size = (containerWidth / 100) * size;
+                var factor = containerWidth > containerHeight ? containerWidth : containerHeight;
+                size = (factor / 100) * size;
                 // add unit
-                size = ( size / 10 )+ 'rem';
+                //size = ( size / 10 )+ 'rem';
+                size = size + 'px';
 
-                var circleElement = '<div style="width:' + size + '; height:' + size + '; background-color:' + color + '; top:' + top + 'px; left:' + left + 'px;" class="circle blur' + blur + ' animated fadeIn"></div>';
+                //var circleElement = '<div style="width:' + size + '; height:' + size + '; background-color:' + color + '; top:' + top + 'px; left:' + left + 'px;" class="circle blur' + blur + ' "></div>';
+                var circleElement = '<div style="width:' + size + '; height:' + size + '; background-color:' + color + '; top:' + top + 'px; left:' + left + 'px;" class="circle"></div>';
 
                 $(container).append(circleElement);
             }, (i * delay));
@@ -80,22 +85,26 @@ function circleSeqz() {
 
     };
 
-    makeCircles('#circles-bg', darkred, 8, 30, 3, 5);
+    //makeCircles('#circles0', ['#000'], 10, 40, 5, 8);
+
+    makeCircles('#circles1', darkred, 10, 40, 5, 8);
 
     setTimeout(function() {
-        makeCircles('#circles-back', colorsBack, 3, 20, 2, 4)
-      }, delay
-    );
+        makeCircles('#circles2', red, 5, 20, 3, 5)
+    }, delay);
 
     setTimeout(function() {
-        makeCircles('#circles-front', colorsFront, 1, 10, 2, 4)
-      }, (delay * 2)
-    );
+        makeCircles('#circles3', colors3, 3, 14, 2, 4)
+    }, delay * 2);
+
+    setTimeout(function() {
+        makeCircles('#circles4', colors4, 1, 10, 2, 4)
+    }, (delay * 3));
 
 };
 
 
 
 $(function() {
-  circleSeqz();
+    circleSeqz();
 });

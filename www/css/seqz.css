@@ -268,7 +268,8 @@ header {
   height : 3rem;
 }
 
-footer {
+footer,
+.footer-spacer {
   height: 5rem;
 }
 
@@ -298,13 +299,14 @@ footer {
   bottom : 0;
 }
 
-.header-spacer {
+.header-spacer,
+.footer-spacer {
   float         : none;
   margin-bottom : 1rem;
 }
 
 #circle-container {
-  background-color: #000000;
+  background-color: #500000;
   /*
   -webkit-filter: blur(10px);
     filter: blur(10px);
@@ -321,12 +323,24 @@ footer {
   margin: 0;
 }
 
-#circles-front {
+#circles1 {
+  z-index: 1;
+}
+
+#circles1 {
   z-index: 2;
 }
 
-#circles-back {
-  z-index: 1;
+#circles2 {
+  z-index: 3;
+}
+
+#circles3 {
+  z-index: 4;
+}
+
+#circles4 {
+  z-index: 5;
 }
 
 .circle {
@@ -335,16 +349,21 @@ footer {
 }
 
 .blur1 {
+  -webkit-filter: blur(1rem);
+  filter: blur(1rem);
+}
+
+.blur2 {
   -webkit-filter: blur(2rem);
   filter: blur(2rem);
 }
 
-.blur2 {
+.blur3 {
   -webkit-filter: blur(3rem);
   filter: blur(3rem);
 }
 
-.blur3 {
+.blur4 {
   -webkit-filter: blur(4rem);
   filter: blur(4rem);
 }
@@ -446,11 +465,10 @@ footer {
 
 .ready-wrapper {
   top            : 50%;
-  left           : 50%;
   width          : 40rem;
   max-width      : 100%;
   height         : 12rem;
-  margin         : -6rem -20rem;
+  margin-top     : -6rem;
   text-align     : center;
   vertical-align : middle;
 }
@@ -755,7 +773,8 @@ footer {
     height : 4rem;
   }
 
-  footer {
+  footer,
+  .footer-spacer {
     height: 6rem;
   }
 
@@ -783,7 +802,8 @@ footer {
     height : 5rem;
   }
 
-  footer {
+  footer,
+  .footer-spacer {
     height: 7rem;
   }
 
