@@ -226,19 +226,25 @@ function setActive(ind) {
         $('#resultscreen .resultdiv').hide();
         if (co < 2) {
             // Wow!
-            $('#resultscreen .result1').show();
+            $('#resultscreen .result1').addClass('active').show();
         } else if (co >= 2 && co < 3) {
             // Okay
-            $('#resultscreen .result2').show();
+            $('#resultscreen .result2').addClass('active').show();
         } else if (co < 4) {
             // bad
-            $('#resultscreen .result3').show();
+            $('#resultscreen .result3').addClass('active').show();
         } else {
             // wtf
-            $('#resultscreen .result4').show();
+            $('#resultscreen .result4').addClass('active').show();
         }
 
         $('#resultscreen').show();
+        var el = document.querySelector('#resultscreen .active');
+        html2canvas(el, {
+          onrendered: function(canvas) {
+            document.getElementById('result-canvas').appendChild(canvas);
+          }
+        });
 
         return false;
     }

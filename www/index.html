@@ -20,6 +20,7 @@
     <script src="js/jquery-3.2.0.min.js"></script>
     <script src="js/prototype.js"></script>
     <script src="js/toastr.min.js"></script>
+    <script src="js/circles.js"></script>
     <script src="js/funcs.js"></script>
     <script src="js/templates.js"></script>
     <script src="js/pollSeqz.js"></script>
@@ -39,6 +40,11 @@
 </head>
 
 <body class="bg-image">
+  <div id="circle-container" class="circle-container">
+    <div id="circles-front" class="circle-container"> </div>
+    <div id="circles-back" class="circle-container"> </div>
+    <div id="circles-bg" class="circle-container"> </div>
+  </div>
     <div id="flash" class="screen overlay hidden"></div>
     <div id="splash" class="screen splash hidden">2x!</div>
     <div id="bonus-splash" class="screen splash hidden">100</div>
@@ -96,10 +102,12 @@
         <div class="header-spacer"></div>
         <div class="frame">
             <div class="resultdiv result1">
+              <div>
                 <div class="res-text">
                     <h2><span>WOW!</span><br><span>Ihr habt <score>0</score> von <span class="result-max">150</span>Punkte!</span></h2>
                 </div>
                 <div class="star match-badge res-star1"><score>0</score></div>
+              </div>
             </div>
             <div class="resultdiv result2">
                 <div class="res-text">
