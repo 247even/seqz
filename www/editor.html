@@ -33,231 +33,123 @@
     <script src="js/seqz.js"></script>
 </head>
 
-<body class="bg-image">
-  <div id="circle-container" class="circle-container">
-    <div id="circles4" class="circle-container blur1"> </div>
-    <div id="circles3" class="circle-container blur2"> </div>
-    <div id="circles2" class="circle-container blur2"> </div>
-    <div id="circles1" class="circle-container blur3"> </div>
-    <div id="circles0" class="circle-container blur2"> </div>
-  </div>
-  <header>
-      <div id="header-logo" class="logo-bg coloreffect">
-        SEQZ!
-      </div>
-      <div id="info-box">
-        <user>Player</user> vs. <opponent>Player</opponent>
-      </div>
-  </header>
-
-  <div class="header-spacer"></div>
-
-  <div id="editor-main" class="screen">
-    <div class="header-spacer"></div>
-    <div id="editor-content" class="content-wrapper">
-        <div class="frage">
-            <h3><span>Jetzt hier SEQZ machen:</span></h3>
+<body>
+    <header>
+        <div id="header-logo" class="logo-bg coloreffect">
+            SEQZ!
         </div>
-
-        <div class="spacer" style="clear:both;">
-            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==">
+        <div id="info-box">
+            <user>Player</user> vs.
+            <opponent>Player</opponent>
         </div>
+    </header>
 
-        <div class="form-row">
-            <div class="">
-                <span class="label-span"><h6>Wer mit wem?</h6></span>
+<div id="main-wrapper">
+    <div id="editor-main">
+        <div class="header-spacer"></div>
+        <div id="editor-content" class="content-wrapper">
+            <div class="frage">
+                <h3><span>Jetzt hier SEQZ machen:</span></h3>
             </div>
-            <div class="divTable">
-                <div class="divTableBody">
-                    <div class="divTableRow">
-                        <div class="divTableCell col1">Spieler 1:</div>
-                        <div class="divTableCell">
-                            <input id="name1" class="name-input" tabindex="1" type="text" placeholder="Name 1" />
+
+            <div class="spacer" style="clear:both;">
+                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==">
+            </div>
+
+            <div class="form-row">
+                <div class="">
+                    <span class="label-span"><h6>Wer mit wem?</h6></span>
+                </div>
+                <div class="divTable">
+                    <div class="divTableBody">
+                        <div class="divTableRow">
+                            <div class="divTableCell col1">Spieler 1:</div>
+                            <div class="divTableCell">
+                                <input id="name1" class="name-input" tabindex="1" type="text" placeholder="Name 1" />
+                            </div>
                         </div>
-                    </div>
-                    <div class="divTableRow">
-                        <div class="divTableCell col1">Spieler 2:</div>
-                        <div class="divTableCell">
-                            <input id="name2" class="name-input" tabindex="2" type="text" placeholder="Name 2" />
+                        <div class="divTableRow">
+                            <div class="divTableCell col1">Spieler 2:</div>
+                            <div class="divTableCell">
+                                <input id="name2" class="name-input" tabindex="2" type="text" placeholder="Name 2" />
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!--
-        <div class="form-row">
-            <div class="">
-                <span class="label-span"><h6>Wer mit wem?</h6></span>
+            <div class="spacer" style="clear:both;">
+                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==">
             </div>
-            <div class="divTable">
-                <div class="divTableBody">
-                    <div class="divTableRow">
-                        <div class="divTableCell">
-                            <input id="name1" class="name-input ta-center" tabindex="1" type="text" placeholder="Spieler 1" />
-                        </div>
-                        <div class="divTableCell">
-                            &amp;
-                        </div>
-                        <div class="divTableCell">
-                            <input id="name2" class="name-input ta-center" tabindex="2" type="text" placeholder="Spieler 2" />
+
+            <div id="fragen-row" class="form-row hidden">
+                <div class="">
+                    <span class="label-span"><h6>Fragen:</h6></span>
+                </div>
+                <div class="divTable">
+                    <div class="divTableBody">
+                        <div class="divTableRow">
+                            <div class="divTableCell">
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
--->
-
-        <!--
-            <div class="form-row">
-                <label>Namen*:</label>
-                <input id="name1" type="text" placeholder="Name 1" />
-                <span>vs.</span>
-                <input id="name2" type="text" placeholder="Name 2" />
+            <div id="seqzOutput" class="sortable" style="clear:both;">
             </div>
--->
-        <div class="spacer" style="clear:both;">
-            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==">
-        </div>
-
-        <div id="fragen-row" class="form-row hidden">
-            <div class="">
-                <span class="label-span"><h6>Fragen:</h6></span>
+            <div class="spacer" style="clear:both;">
+                <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==">
             </div>
-            <div class="divTable">
-                <div class="divTableBody">
-                    <div class="divTableRow">
-                        <div class="divTableCell">
-                        </div>
-                    </div>
+
+            <div id="speichern-row" class="form-row row-center hidden">
+                <button id="submit-btn" class="btn btn-primary" type="button">Speichern</button>
+            </div>
+
+            <div id="id-row" class="form-row hidden">
+                <div class="">
+                    <span class="label-span"><h6>SEQZ-ID:</h6></span>
                 </div>
-            </div>
-        </div>
-        <div id="seqzOutput" class="sortable" style="clear:both;">
-        </div>
-        <div class="spacer" style="clear:both;">
-            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==">
-        </div>
-        <!--
-            <div id="comfort-editor" class="form-row">
-              <div class="form-row">
-                  <div class="divTable">
-                      <div class="divTableBody">
-                          <div class="divTableRow">
-                              <div class="divTableCellLabel">Frage:</div>
-                              <div class="divTableCell">
-                                    <textarea id="comfort-frage" class="noenter" rows="2" data-target="comfort-aw1"></textarea>
-                              </div>
-                          </div>
-                          <div class="divTableRow">
-                              <div class="divTableCellLabel">Antwort 1:</div>
-                              <div class="divTableCell"><input id="comfort-aw1" class="comfort-antwort noenter" data-target="comfort-aw2" type="text"/></div>
-                          </div>
-                          <div class="divTableRow">
-                              <div class="divTableCellLabel">Antwort 2:</div>
-                              <div class="divTableCell"><input id="comfort-aw2" class="comfort-antwort noenter" data-target="comfort-aw3" type="text"/></div>
-                          </div>
-                          <div class="divTableRow">
-                              <div class="divTableCellLabel aw-inactive">Antwort 3:</div>
-                              <div class="divTableCell"><input id="comfort-aw3" class="comfort-antwort noenter" data-target="comfort-aw4" type="text"/></div>
-                          </div>
-                          <div class="divTableRow">
-                              <div class="divTableCellLabel aw-inactive">Antwort 4:</div>
-                              <div class="divTableCell"><input id="comfort-aw4" class="comfort-antwort noenter" type="text"/></div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-            </div>
-          -->
-
-        <!--
-            <div class="form-row">
-                <label for="fragen-area">Fragen*:</label>
-                <textarea id="fragen-area" cols="45"></textarea>
-                <div style="clear:both;"></div>
-            </div>
-            <div id="status-div" class="form-row">
-                <label>Status:</label>
-                <span id="status">Du hast 0 Fragen.</span>
-            </div>
-            <div class="form-row">
-                <label for="password">Passwort:</label>
-                <input id="password" type="text" />
-            </div>
-            -->
-
-        <div id="speichern-row" class="form-row row-center hidden">
-            <button id="submit-btn" class="btn btn-primary" type="button">Speichern</button>
-        </div>
-
-        <div class="spacer" style="clear:both;">
-            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==">
-        </div>
-
-        <div id="id-row" class="form-row hidden">
-            <div class="">
-                <span class="label-span"><h6>SEQZ-ID:</h6></span>
-            </div>
-            <div class="divTable">
-                <div class="divTableBody">
-                    <div class="divTableRow">
-                        <div class="divTableCell col1">ID:</div>
-                        <div class="divTableCell">
-                            <input id="seqzId" class="seqzUrl" type="text" readonly/>
-                        </div>
-                        <div class="divTableCell">
-                            <span id="copy-id-button" class="copy-button icon" title="copy">
+                <div class="divTable">
+                    <div class="divTableBody">
+                        <div class="divTableRow">
+                            <div class="divTableCell col1">ID:</div>
+                            <div class="divTableCell">
+                                <input id="seqzId" class="seqzUrl" type="text" readonly/>
+                            </div>
+                            <div class="divTableCell">
+                                <span id="copy-id-button" class="copy-button icon" title="copy">
 
                             </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="url-row" class="form-row hidden">
+                <div class="">
+                    <span class="label-span"><h6>SEQZ:</h6></span>
+                </div>
+                <div class="divTable">
+                    <div class="divTableBody">
+                        <div class="divTableRow">
+                            <div class="divTableCell col1">URL:</div>
+                            <div class="divTableCell">
+                                <input id="seqzUrl" class="seqzUrl" type="text" readonly/>
+                            </div>
+                            <div class="divTableCell">
+                                <span id="copy-url-button" class="copy-button icon" title="copy"></span>
+                            </div>
+                            <div class="divTableCell">
+                                <span class="link-button icon" title="go to..."></span>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div id="url-row" class="form-row hidden">
-            <div class="">
-                <span class="label-span"><h6>SEQZ:</h6></span>
-            </div>
-            <div class="divTable">
-                <div class="divTableBody">
-                    <div class="divTableRow">
-                        <div class="divTableCell col1">URL:</div>
-                        <div class="divTableCell">
-                            <input id="seqzUrl" class="seqzUrl" type="text" readonly/>
-                        </div>
-                        <div class="divTableCell">
-                            <span id="copy-url-button" class="copy-button icon" title="copy"></span>
-                        </div>
-                        <div class="divTableCell">
-                            <span class="link-button icon" title="go to..."></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--
-        <div id="url-row" class="form-row">
-            <label for="seqzUrl">URL:</label>
-            <input id="seqzUrl" type="text" readonly/>
-        </div>
-      -->
-
-        <div id="footer-shadow">
-            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==">
-        </div>
-    </div>
-
-  </div>
-
-    <div id="bottom" class="bottom" style="clear:both">
-    </div>
-
-    <div class="spacer" style="clear:both;">
-        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==">
-    </div>
-
+    </div><!-- editor-main -->
 
     <div id="editor-footer">
         <div id="comfort-editor" class="form-row content-wrapper">
@@ -290,6 +182,16 @@
                 </div>
             </div>
         </div>
+    </div><!-- editor-footer -->
+
+  </div> <!-- main -->
+
+    <div id="circle-container" class="circle-container">
+        <div id="circles4" class="circle-container blur1"> </div>
+        <div id="circles3" class="circle-container blur2"> </div>
+        <div id="circles2" class="circle-container blur2"> </div>
+        <div id="circles1" class="circle-container blur3"> </div>
+        <div id="circles0" class="circle-container blur2"> </div>
     </div>
 
     <div id="prototypes" style="display: none">

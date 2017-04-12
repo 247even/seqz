@@ -1,9 +1,9 @@
 @font-face {
-   font-family: 'Roboto Mono';
-   src: url('RobotoMono-Regular.ttf');
+    font-family: 'Roboto Mono';
+    src: url('RobotoMono-Regular.ttf');
 }
 
-body {
+html, body {
     overflow: auto!important;
 }
 
@@ -13,18 +13,30 @@ body {
     margin: 0 auto;
 }
 
+#main-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  z-index: 99;
+  float: none;
+  clear: both;
+}
+
 #editor-main textarea, #fragen-edit, #fragen-label, #comfort-editor input, #comfort-editor textarea, .btn, .name-input {
     padding: 0.5rem 0.5rem 0.5rem 1rem;
 }
 
 .label-span {
-  display: inline-block;
-  color: #000;
-  padding: .5rem 1rem;
+    display: inline-block;
+    color: #000;
+    padding: .5rem 1rem;
 }
 
 .label-span, .divTableBody, #fragen-edit, #fragen-label {
-  background-color: #fff;
+    background-color: #fff;
 }
 
 .btn, .btn:active {
@@ -101,13 +113,17 @@ textarea {
 }
 
 #editor-footer {
-  /* position: fixed; */
+    /* position: fixed;
   position: absolute;
+    position: absolute;
     z-index: 99;
     left: 0;
     bottom: 0;
+    */
     background-color: #000;
     padding: 0.5rem;
+    float: none;
+    clear: both;
 }
 
 #footer-shadow {
@@ -116,22 +132,23 @@ textarea {
 }
 
 .link-button, .copy-button {
-  display: inline-block;
-  cursor: pointer;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: contain;
-  width: 2.4rem;
-  height: 2.4rem;
+    display: inline-block;
+    cursor: pointer;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 2.4rem;
+    height: 2.4rem;
 }
 
 .copy-button {
-  background-image: url('../images/icons/ic_content_copy_black_24px.svg');
+    background-image: url('../images/icons/ic_content_copy_black_24px.svg');
 }
 
 .link-button {
-  background-image: url('../images/icons/ic_exit_to_app_black_24px.svg');
+    background-image: url('../images/icons/ic_exit_to_app_black_24px.svg');
 }
+
 
 /*++++++++++++++++++++++++++/
 
@@ -173,9 +190,8 @@ textarea {
     display: table-row-group;
 }
 
-.divTableCell,
-.divTableCellLabel {
-  vertical-align: middle;
+.divTableCell, .divTableCellLabel {
+    vertical-align: middle;
 }
 
 .divTableCellLabel {
@@ -183,7 +199,7 @@ textarea {
 }
 
 .col1 {
-  width: 10rem;
+    width: 10rem;
 }
 
 .aw-inactive {

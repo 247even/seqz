@@ -543,4 +543,6 @@ function buildSeqz() {
             setAnswer($(this).attr('data-ind'), $(this).attr('data-a'), $(this).attr('data-index'));
         });
     }
+
+    $('#prototypes').remove();
 };
