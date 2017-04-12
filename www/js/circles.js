@@ -43,7 +43,6 @@ function circleSeqz() {
 
     var colors3 = lightpink.concat(pinkred);
     var colors4 = yellow.concat(lightyellow);
-
     var delay = 150;
 
     function makeCircles(container, colors, minSize, maxSize, minCount, maxCount) {
@@ -61,49 +60,30 @@ function circleSeqz() {
         $(container).html();
 
         for (var i = 0; i < count; i++) {
-            setTimeout(function() {
-                var color = colors[Math.floor((Math.random() * colorsLength))];
-                var size = Math.floor((Math.random() * maxSize) + minSize);
-                var left = Math.floor((Math.random() * containerWidth));
-                var top = Math.floor((Math.random() * containerHeight));
-                var blur = Math.floor((Math.random() * 3) + 1);
+            var color = colors[Math.floor((Math.random() * colorsLength))];
+            var size = Math.floor((Math.random() * maxSize) + minSize);
+            var left = Math.floor((Math.random() * containerWidth));
+            var top = Math.floor((Math.random() * containerHeight));
+            var blur = Math.floor((Math.random() * 3) + 1);
 
-                // Prozent
-                var factor = containerWidth > containerHeight ? containerWidth : containerHeight;
-                size = (factor / 100) * size;
-                // add unit
-                //size = ( size / 10 )+ 'rem';
-                size = size + 'px';
+            // Prozent
+            var factor = containerWidth > containerHeight ? containerWidth : containerHeight;
+            size = (factor / 100) * size;
+            // add unit
+            //size = ( size / 10 )+ 'rem';
+            size = size + 'px';
 
-                //var circleElement = '<div style="width:' + size + '; height:' + size + '; background-color:' + color + '; top:' + top + 'px; left:' + left + 'px;" class="circle blur' + blur + ' "></div>';
-                var circleElement = '<div style="width:' + size + '; height:' + size + '; background-color:' + color + '; top:' + top + 'px; left:' + left + 'px;" class="circle"></div>';
+            var circleElement = '<div style="width:' + size + '; height:' + size + '; background-color:' + color + '; top:' + top + 'px; left:' + left + 'px;" class="circle"></div>';
 
-                $(container).append(circleElement);
-            }, (i * delay));
-
+            $(container).append(circleElement);
         }
-
     };
 
-    //makeCircles('#circles0', ['#000'], 10, 40, 5, 8);
-
     makeCircles('#circles1', darkred, 10, 40, 5, 8);
-
-    setTimeout(function() {
-        makeCircles('#circles2', red, 5, 20, 3, 5)
-    }, delay);
-
-    setTimeout(function() {
-        makeCircles('#circles3', colors3, 3, 14, 2, 4)
-    }, delay * 2);
-
-    setTimeout(function() {
-        makeCircles('#circles4', colors4, 1, 10, 2, 4)
-    }, (delay * 3));
-
+    makeCircles('#circles2', red, 5, 20, 3, 5)
+    makeCircles('#circles3', colors3, 3, 14, 2, 4)
+    makeCircles('#circles4', colors4, 1, 10, 2, 4)
 };
-
-
 
 $(function() {
     circleSeqz();

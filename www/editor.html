@@ -12,6 +12,13 @@
     <meta name="description" content="">
     <title>SEQZ! Editor</title>
 
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/toastr.min.css" />
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="css/circles.css">
+    <link rel="stylesheet" href="css/seqz.css">
+    <link rel="stylesheet" href="css/editor.css">
+
     <script src="js/jquery-3.2.0.min.js"></script>
     <script src="js/html.sortable.min.js"></script>
     <script src="js/prototype.js"></script>
@@ -24,11 +31,6 @@
     <script src="js/md5.min.js"></script>
     <script src="js/editor.js"></script>
     <script src="js/seqz.js"></script>
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/toastr.min.css" />
-    <link rel="stylesheet" href="css/animate.css">
-    <link rel="stylesheet" href="css/seqz.css">
-    <link rel="stylesheet" href="css/editor.css">
 </head>
 
 <body class="bg-image">
@@ -68,15 +70,15 @@
             <div class="divTable">
                 <div class="divTableBody">
                     <div class="divTableRow">
-                        <div class="divTableCell">Spieler 1:</div>
+                        <div class="divTableCell col1">Spieler 1:</div>
                         <div class="divTableCell">
-                            <input id="name1" class="name-input" tabindex="1" type="text" placeholder="Spieler 1" />
+                            <input id="name1" class="name-input" tabindex="1" type="text" placeholder="Name 1" />
                         </div>
                     </div>
                     <div class="divTableRow">
-                        <div class="divTableCell">Spieler 2:</div>
+                        <div class="divTableCell col1">Spieler 2:</div>
                         <div class="divTableCell">
-                            <input id="name2" class="name-input" tabindex="2" type="text" placeholder="Spieler 2" />
+                            <input id="name2" class="name-input" tabindex="2" type="text" placeholder="Name 2" />
                         </div>
                     </div>
                 </div>
@@ -193,14 +195,14 @@
             <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==">
         </div>
 
-        <div id="id-row" class="form-row">
+        <div id="id-row" class="form-row hidden">
             <div class="">
                 <span class="label-span"><h6>SEQZ-ID:</h6></span>
             </div>
             <div class="divTable">
                 <div class="divTableBody">
                     <div class="divTableRow">
-                        <div class="divTableCell">ID:</div>
+                        <div class="divTableCell col1">ID:</div>
                         <div class="divTableCell">
                             <input id="seqzId" class="seqzUrl" type="text" readonly/>
                         </div>
@@ -214,26 +216,22 @@
             </div>
         </div>
 
-        <div id="url-row" class="form-row">
+        <div id="url-row" class="form-row hidden">
             <div class="">
                 <span class="label-span"><h6>SEQZ:</h6></span>
             </div>
             <div class="divTable">
                 <div class="divTableBody">
                     <div class="divTableRow">
-                        <div class="divTableCell">URL:</div>
+                        <div class="divTableCell col1">URL:</div>
                         <div class="divTableCell">
                             <input id="seqzUrl" class="seqzUrl" type="text" readonly/>
                         </div>
                         <div class="divTableCell">
-                            <span id="copy-url-button" class="copy-button icon" title="copy">
-
-                            </span>
+                            <span id="copy-url-button" class="copy-button icon" title="copy"></span>
                         </div>
                         <div class="divTableCell">
-                            <span class="link-button icon" title="go to...">
-
-                            </span>
+                            <span class="link-button icon" title="go to..."></span>
                         </div>
                     </div>
                 </div>
@@ -286,7 +284,7 @@
                         </div>
                         <div class="divTableRow">
                             <div class="divTableCellLabel aw-inactive">Antwort 4:</div>
-                            <div class="divTableCell"><input id="comfort-aw4" class="comfort-antwort noenter" tabindex="7" type="text" /></div>
+                            <div class="divTableCell"><input id="comfort-aw4" class="comfort-antwort noenter" tabindex="7" data-target="comfort-frage" type="text" /></div>
                         </div>
                     </div>
                 </div>

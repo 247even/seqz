@@ -33,10 +33,10 @@ function saveSeqz(id) {
         if (http.readyState == 4 && http.status == 200) {
             console.log(http.responseText);
             $('#seqzId').val(http.responseText);
-            var location = window.location;
-            location = location.href.split('seqz');
+            var location = window.location.href.split('seqz');
             console.log(location);
             $('#seqzUrl').val(location[0] + 'seqz/?' + http.responseText);
+            $('#url-row, #id-row').show().animateCss('fadeIn');
         }
     }
     setEditorData();

@@ -81,26 +81,23 @@ function newNewSeqz() {
         var player1 = $('#name1').val().trim();
         var player2 = $('#name2').val().trim();
         //        var id = (player1 + player2).toLowerCase();
-        var id = makeId(player1 + player2 + $.now());
+      //  var id = makeId(player1 + player2 + $.now());
 
         //var passwort = $('#password').val().trim();
         var passwort;
 
         newSeqz = {
-            "id": id,
+            "id": makeId(player1 + player2 + $.now()),
             "Player1": player1,
             "Player2": player2,
             "Fragen": [],
             "md5": null
         };
-
         console.log(newSeqz);
 
         if (passwort) {
             newSeqz['Passwort'] = passwort;
         }
-
-        //localStorage.setItem('newSeqz_' + newSeqz.id, 'id=' + newSeqz.id + '&seqz=' + JSON.stringify(newSeqz) + '&t=' + Date.now());
         setEditorData();
     }
 
@@ -280,13 +277,15 @@ function buildComfortSeqz() {
 };
 
 function resetComfort() {
-    $('input').val('');
-    //$('#seqzId').val('');
-    //$('#seqzUrl').val('');
-    $('#comfort-editor textarea').val('');
-    $('#name1').focus();
+    $('#comfort-editor input, #comfort-editor textarea').val('');
+    //$('#comfort-editor textarea').val('');
+    $('#comfort-frage').focus();
+};
 
-    //$('#comfort-editor input').val('');
+function resetAll() {
+  $('input, textarea').val('');
+  //$('textarea').val('');
+  $('#name1').focus();
 };
 
 /*
@@ -321,7 +320,7 @@ var inview;
 */
 
 ready(function() {
-    resetComfort();
+    resetAll();
     setStatus();
 
     if (queryId) {
@@ -409,19 +408,17 @@ ready(function() {
                 }
             }
 
+            if ($(this).attr('id') == "comfort-aw4") {
+                buildComfortSeqz();
+            }
 
             if ($(this).attr('data-target')) {
                 $('#' + $(this).attr('data-target')).focus();
             }
-            if ($(this).attr('id') == "comfort-aw4") {
-
-                buildComfortSeqz();
-            }
-            return false;
         }
 
     }).on('blur', function() {
-        console.log('blur');
+        //console.log('blur');
         //buildComfort();
     });
 
@@ -466,23 +463,21 @@ ready(function() {
 
     $('.link-button').on('click', function(e) {
         var url = $('#seqzUrl').val();
-        window.open(url, '_blank', '');
+        if (url) {
+          window.open(url, '_blank', '');
+        }
     });
 
     $('#copy-url-button').on('click', function() {
-        $('#seqzUrl').select();
         var url = $('#seqzUrl').val();
-
         if (!url) {
             return false;
         }
-
+        $('#seqzUrl').select();
         try {
             if (document.execCommand('copy')) {
                 toastr.info('SEQZ-URL in die Zwischenablage kopiert');
-            };
-            //var msg = successful ? 'successful' : 'unsuccessful';
-            //console.log('Copying text command was ' + msg);
+            }
         } catch (err) {
             console.log('Oops, unable to copy');
         }
