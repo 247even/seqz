@@ -128,6 +128,8 @@ function pushNewSeqz(frage) {
         'targets': '#seqzOutput'
     });
 
+    $('#seqzOutput .form-row:last').show().animateCss('fadeIn');
+
     $('.delete-row').off('click').on('click', function(e) {
         e.preventDefault();
         e.stopPropagation();
@@ -175,6 +177,8 @@ function newSeqzOutput() {
             },
             'targets': '#seqzOutput'
         });
+
+        $('#seqzOutput .form-row:last').show().animateCss('fadeIn');
     }
 
     $('.delete-row').on('click', function(e) {
@@ -222,7 +226,7 @@ function updateNewSeqz() {
 
     //localStorage.setItem('newSeqz_' + newSeqz.id, 'id=' + newSeqz.id + '&seqz=' + JSON.stringify(newSeqz) + '&t=' + Date.now());
     setEditorData();
-    saveSeqz();
+    //saveSeqz();
 
     if (newSeqz.Fragen.length < 1) {
         $('#speichern-row').addClass('hidden');
