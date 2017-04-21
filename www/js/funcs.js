@@ -155,7 +155,7 @@ function getQuerySeqz(what) {
         if (user != 0 && user != 1 && user != 2) {
             user = false;
         } else {
-          var query = query.substring(0, query.length-1);
+            var query = query.substring(0, query.length - 1);
         }
     }
 
@@ -287,4 +287,83 @@ function fileExists(url, cb) {
         },
         300
     );
+};
+
+
+///////////////////////////
+
+function loader(state) {
+    if (state) {
+        if ($('#loader-container').hasClass('hidden')) {
+            $('#loader-container').removeClass('hidden').fadeIn();
+        }
+        return false;
+    }
+    $('#loader-container').fadeOut().addClass('hidden');
+};
+
+//////////////////////////
+
+var resultImgData;
+
+function makeImage() {
+
+    var node = document.getElementById('export-container');
+
+    domtoimage.toPng(node)
+        .then(function(dataUrl) {
+            //<a href="https://www.facebook.com/sharer/sharer.php?u=">https://www.facebook.com/sharer/sharer.php</>
+
+            resultImgData = dataUrl;
+            saveImage(dataUrl);
+            var img = new Image();
+            img.src = dataUrl;
+            //document.body.appendChild(img);
+            document.getElementById('export-out').appendChild(img);
+        })
+        .catch(function(error) {
+            console.error('oops, something went wrong!', error);
+        });
+};
+
+//////////////////////
+
+function saveImage(img) {
+  console.log(img);
+  var data = 'id=' + seqz.id
+  + '&t=' + Date.now()
+  + '&img=' + img;
+  var xhr = new XMLHttpRequest();
+  xhr.open('POST', 'saveImage.php');
+  xhr.onreadystatechange = function() {
+      if (xhr.readyState > 3 && xhr.status == 200) {
+        console.log(xhr.responseText);
+          //success(xhr.responseText);
+      }
+  };
+  xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+  xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+  xhr.send(data);
+};
+
+//////////////////////
+
+function shareOnFb() {
+    var data = 'id=' + seqz.id
+    + '&user1=' + seqz.User
+    + '&user2=' + seqz.Opponent
+    + '&t=' + Date.now()
+    + '&img=' + resultImgData;
+    console.log(data);
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', url);
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState > 3 && xhr.status == 200) {
+          console.log('success');
+            //success(xhr.responseText);
+        }
+    };
+    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.send(data);
 };

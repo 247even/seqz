@@ -8,8 +8,10 @@ function idButtonDisable(st) {
 };
 
 function loadSeqz(del) {
+    loader(true);
     if (!seqzSource) {
         console.log("no seqzSource");
+        loader(false);
         return false;
     }
 
@@ -20,11 +22,13 @@ function loadSeqz(del) {
                 //stopSeqzTimer();
                 //seqz.activeIndex = 0;
                 setPlayers();
+                loader(false);
                 //buildSeqz();
                 //setActive('id1');
             })
         } else {
             setPlayers();
+            loader(false);
         }
     });
 };
@@ -511,7 +515,7 @@ function buildSeqz() {
             seqz.Fragen[key]['Typ'] = q.Typ;
         }
 
-        prototype({
+        repaste({
             'template': '#tpl-' + q.Typ,
             'selectors': {
                 'id': qid,

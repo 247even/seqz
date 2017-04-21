@@ -115,7 +115,7 @@ function pushNewSeqz(frage) {
     var key = newSeqz.Fragen.length - 1;
     console.log(newSeqz);
     console.log('#frage-tmpl' + newSeqz.Fragen[key].Antworten.length);
-    prototype({
+    repaste({
         'template': '#frage-tmpl' + newSeqz.Fragen[key].Antworten.length,
         'selectors': {
             'nr': (parseInt(key) + 1),
@@ -165,7 +165,7 @@ function newSeqzOutput() {
 
         var Frage = newSeqz.Fragen[key].Frage;
 
-        prototype({
+        repaste({
             'template': '#frage-tmpl' + newSeqz.Fragen[key].Antworten.length,
             'selectors': {
                 'nr': (parseInt(key) + 1),

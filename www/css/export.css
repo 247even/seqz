@@ -1,0 +1,56 @@
+#export-container {
+    width: 600px;
+    height: 600px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    background: url('../images/seqz-bg.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 10px;
+    border: 2px solid #000;
+    color: #fff;
+}
+
+#export-container .logo {
+    position: absolute;
+    width: 200px;
+    height: 50px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: url('../images/seqz_.svg');
+    opacity: 0.5;
+    filter: alpha(opacity=5);
+}
+
+#export-container #export-score {
+    position: absolute;
+    top: 225px;
+    left: 275px;
+    width: 250px;
+    height: 250px;
+    font-size: 80px;
+    color: #fff;
+}
+
+#export-container score {
+  font-weight: bold;
+}
+
+#export-container .match-badge {
+  width: 200px;
+  height: 200px;
+  width: 250px;
+  height: 250px;
+  font-size: 125px;
+  line-height: 250px;
+}
+
+#export-container #export-users {
+    position: absolute;
+    width: 480px;
+    left: 10px;
+    top: 140px;
+    font-size: 48px;
+}

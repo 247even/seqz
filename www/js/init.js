@@ -100,4 +100,8 @@ ready(function() {
 
     loadSeqz();
 
+    $('#export-container').on('click', function(){
+      makeImage();
+    });
+
 });

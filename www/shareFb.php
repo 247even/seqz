@@ -12,9 +12,50 @@
     <meta name="description" content="">
     <title>SEQZ!</title>
 
+    <?php
+        function saveFileAs($content,$target) {
+        //	$enContent = json_encode($content);
+        	$enContent = $content;
+        	//mkdir($target);
+        //	touch($target);
+        //	chmod($target, 0777);
+        	$fp = fopen($target, 'w');
+        	fwrite($fp, $enContent);
+        	fclose($fp);
+        	//echo $target.' saved';
+        };
+
+        $actual_link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+
+        if(isset($_GET['id'])) {
+        	$id = $_GET['id'];
+        }
+
+        if(isset($_GET['user1']) && isset($_GET['user2'])) {
+        	$user1 = $_GET['user1'];
+          $user2 = $_GET['user2'];
+        }
+
+        if(isset($_GET['score'])) {
+        	$score = $_GET['score'];
+        }
+
+        if(isset($_GET['img'])) {
+        	$img = $_GET['img'];
+          $imgurl = 'shared/'.$id.'png';
+          saveFileAs($img,$imgurl);
+        }
+    ?>
+
+    <meta property="og:url" content="<?php echo $actual_link ?>" />
+    <meta property="og:locale" content="de_DE" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="SEQZ: <?php echo $user1.' und '.$user2.' haben '.$score.' Punkte!' ?>" />
+    <meta property="og:description" content="Wieviel schaffst du?" />
+    <meta property="og:image" content="<?php echo $imgurl ?>" />
+
     <!--
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Fredoka+One" rel="stylesheet">
     -->
 
@@ -25,12 +66,9 @@
     <link rel="stylesheet" href="css/seqz.css">
     <link rel="stylesheet" href="css/export.css">
 
-    <!--
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
--->
-    <script src="js/jquery-3.2.0.min.js"></script>
+
+    <!--<script src="js/jquery-3.2.0.min.js"></script>-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="js/repaste.min.js"></script>
     <script src="js/toastr.min.js"></script>
     <script src="js/circles.min.js"></script>
