@@ -13,38 +13,16 @@
     <title>SEQZ!</title>
 
     <?php
-        function saveFileAs($content,$target) {
-        //	$enContent = json_encode($content);
-        	$enContent = $content;
-        	//mkdir($target);
-        //	touch($target);
-        //	chmod($target, 0777);
-        	$fp = fopen($target, 'w');
-        	fwrite($fp, $enContent);
-        	fclose($fp);
-        	//echo $target.' saved';
-        };
-
         $actual_link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 
         if(isset($_GET['id'])) {
         	$id = $_GET['id'];
+          $imgurl = 'https://247even.com/seqz/www/shared/'.$id.'.png';
         }
 
-        if(isset($_GET['user1']) && isset($_GET['user2'])) {
-        	$user1 = $_GET['user1'];
-          $user2 = $_GET['user2'];
-        }
-
-        if(isset($_GET['score'])) {
-        	$score = $_GET['score'];
-        }
-
-        if(isset($_GET['img'])) {
-        	$img = $_GET['img'];
-          $imgurl = 'shared/'.$id.'png';
-          saveFileAs($img,$imgurl);
-        }
+        $user1 = 'User1';
+        $user2 = 'User2';
+        $score = '1234';
     ?>
 
     <meta property="og:url" content="<?php echo $actual_link ?>" />

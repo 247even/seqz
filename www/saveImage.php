@@ -21,9 +21,14 @@ if ( isset($_POST['img']) && isset($_POST['id']) ) {
     $datax = str_replace(' ', '+', $data[1]);
     $content = base64_decode($datax);
 
-    saveFileAs($content, 'shared/'.$id.'.png');
-
+    if (saveFileAs($content, 'shared/'.$id.'.png')){
       echo 'file saved';
+    } else {
+      echo 'failed';
+    }
+
+      //$success = file_put_contents($file, $data);
+    	//echo $success ? $file : 'Unable to save the file.';
 }
 
 ?>
